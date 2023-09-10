@@ -1,3 +1,4 @@
+/*
 import { useState } from "react";
 import { CopyIcon } from "./assets/CopyIcon";
 import { DiamondIcon } from "./assets/DiamondIcon";
@@ -88,3 +89,4 @@ export const ContractInteraction = () => {
     </div>
   );
 };
+*/

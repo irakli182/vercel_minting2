@@ -1,3 +1,4 @@
+/*
 import { useEffect, useRef, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { useAccount } from "wagmi";
@@ -99,8 +100,7 @@ export const ContractData = () => {
         </div>
 
         <div className="mt-3 border border-primary bg-neutral rounded-3xl text-secondary  overflow-hidden text-[116px] whitespace-nowrap w-full uppercase tracking-tighter font-bai-jamjuree leading-tight">
-          <div className="relative overflow-x-hidden" ref={containerRef}>
-            {/* for speed calculating purposes */}
+          <div className="relative overflow-x-hidden" ref={containerRef}> 
             <div className="absolute -left-[9999rem]" ref={greetingRef}>
               <div className="px-4">{currentGreeting}</div>
             </div>
@@ -146,3 +146,5 @@ export const ContractData = () => {
     </div>
   );
 };
+*/
+

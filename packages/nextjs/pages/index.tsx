@@ -1,70 +1,52 @@
-import Link from "next/link";
 import type { NextPage } from "next";
-import { BugAntIcon, MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/outline";
-import { MetaHeader } from "~~/components/MetaHeader";
+import React, { useState } from "react";
+import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
+
+// Initialize the state variables with default values
+const [addr, setAddr] = useState<string>('');
+const [amount, setAmount] = useState<string>('0'); // Set a default value of '0'
+
+const handleAddrChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setAddr(event.target.value);
+};
+const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setAmount(event.target.value);
+};
+
+const { writeAsync } = useScaffoldContractWrite({
+  contractName: "NNNToken", // Replace with the actual contract name
+  functionName: "mint", // Replace with the actual minting function name
+  args: [addr, BigInt(0)] // Provide default values for addr and amount as BigInt(0)
+  // Additional configuration options if needed
+});
+
+const mintTokens = async () => {
+  console.log('MINT NNN Token!');
+  const IntAmount = Number(amount);
+  const weiAmount = IntAmount * 10**18;
+  const weiAmountBigInt = BigInt(weiAmount);
+  // Call the minting function with the updated arguments
+  await writeAsync({
+    args: [addr, weiAmountBigInt], // Provide the recipient's address and weiAmount as bigint
+    // Additional configuration options if needed
+  });
+}
+  
   return (
     <>
-      <MetaHeader />
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center mb-8">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
-          </h1>
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/pages/index.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
-        </div>
+     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+        <p>address:</p>
+        <input placeholder="wallet address" id="addr" style={{color: "black", width: '200px'}} onChange={handleAddrChange}/>
+        <br></br>
+        <p>amount</p>
+        <input placeholder="NNN token amount" id="amount" style={{color: 'black', width: '200px'}} onChange={handleAmountChange} />
+        <br></br>
 
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contract
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <SparklesIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Experiment with{" "}
-                <Link href="/example-ui" passHref className="link">
-                  Example UI
-                </Link>{" "}
-                to build your own UI.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-          </div>
-        </div>
+        <button onClick={mintTokens} style={{color: 'white', width: '50px', backgroundColor: 'purple', borderRadius: '10px', padding: '5px'}}
+
+        >Mint</button>
       </div>
     </>
   );

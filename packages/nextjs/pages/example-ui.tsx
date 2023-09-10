@@ -17,7 +17,7 @@ const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   setAmount(event.target.value);
 };
 
-const { writeAsync, isMining } = useScaffoldContractWrite({
+const { writeAsync } = useScaffoldContractWrite({
   contractName: "NNNToken", // Replace with the actual contract name
   functionName: "mint", // Replace with the actual minting function name
   args: [addr, BigInt(0)] // Provide default values for addr and amount as BigInt(0)

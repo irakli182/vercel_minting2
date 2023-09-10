@@ -6,37 +6,35 @@ import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 const ExampleUI: NextPage = () => {
 
 
-  // getting values from input (address and token amount)
+// Initialize the state variables with default values
+const [addr, setAddr] = useState<string>('');
+const [amount, setAmount] = useState<string>('0'); // Set a default value of '0'
 
-  const [addr, setAddr] = useState<string>('');
-  const [amount, setAmount] = useState<string>('');
+const handleAddrChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setAddr(event.target.value);
+};
+const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setAmount(event.target.value);
+};
 
-  const handleAddrChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAddr(event.target.value);
-  };
-  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(event.target.value);
-  };
+const { writeAsync, isMining } = useScaffoldContractWrite({
+  contractName: "NNNToken", // Replace with the actual contract name
+  functionName: "mint", // Replace with the actual minting function name
+  args: [addr, BigInt(0)] // Provide default values for addr and amount as BigInt(0)
+  // Additional configuration options if needed
+});
 
-
-  const { writeAsync, isMining } = useScaffoldContractWrite({
-    contractName: "NNNToken", // Replace with the actual contract name
-    functionName: "mint", // Replace with the actual minting function name
-    args: [] // Initialize with empty arguments
+const mintTokens = async () => {
+  console.log('MINT NNN Token!');
+  const IntAmount = Number(amount);
+  const weiAmount = IntAmount * 10**18;
+  const weiAmountBigInt = BigInt(weiAmount);
+  // Call the minting function with the updated arguments
+  await writeAsync({
+    args: [addr, weiAmountBigInt], // Provide the recipient's address and weiAmount as bigint
     // Additional configuration options if needed
   });
-
-  const mintTokens = async () => {
-    console.log('MINT NNN Token!');
-    const IntAmount = Number(amount);
-    const weiAmount = IntAmount * 10**18;
-    const weiAmountBigInt = BigInt(weiAmount);
-    // Call the minting function with the updated arguments
-    await writeAsync({
-      args: [addr, weiAmountBigInt], // Provide the recipient's address and weiAmount as bigint
-      // Additional configuration options if needed
-    });
-  }
+}
 
 
   return (

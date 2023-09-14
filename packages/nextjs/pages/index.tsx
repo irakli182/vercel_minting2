@@ -23,6 +23,7 @@ const { writeAsync } = useScaffoldContractWrite({
 });
 
 const mintTokens = async () => {
+  alert(process.env.REACT_APP_ETHEREUM_NETWORK)
   console.log('MINT NNN Token!');
   const IntAmount = Number(amount);
   const weiAmount = IntAmount * 10**18;

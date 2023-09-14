@@ -1,0 +1,47 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
+
+.mainDiv {
+    text-align: left;
+    border-radius: 30px;
+    background-color: #385284;
+    padding: 20px;
+    width: 500px;
+}
+
+.text {
+    padding-left: 6px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.input {
+    background-color: #2A3655;
+    padding: 10px;
+    border-radius: 25px;
+    width: 100%;
+    color: white;
+}
+
+.button {
+    font-family: sans-serif;
+    font-weight: bold;
+    float: right;
+    margin-top: 20px;
+    color: white;
+    width: 90px;
+    background-color: #2A3655;
+    border-radius: 25px;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+.button:hover {
+    background-color: #182032;
+    transition: 0.2s;
+    
+}

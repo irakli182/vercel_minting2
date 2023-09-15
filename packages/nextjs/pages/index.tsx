@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import type { NextPage } from "next";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
-import network from "../../../config.js"
 
 const Home: NextPage = () => {
+
+  const network = process.env.NEXT_PUBLIC_REACT_APP_ETHEREUM_NETWORK;
 
   // Initialize the state variables with default values
   const [addr, setAddr] = useState<string>("");

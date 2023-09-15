@@ -4,6 +4,8 @@ import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
 
+  const test = process.env.YARN_ENABLE_IMMUTABLE_INSTALLS;
+
   // Initialize the state variables with default values
   const [addr, setAddr] = useState<string>("");
   const [amount, setAmount] = useState<string>("0"); // Set a default value of '0'
@@ -23,6 +25,7 @@ const Home: NextPage = () => {
   });
 
   const mintTokens = async () => {
+    alert(test)
     console.log("MINT NNN Token!");
     const IntAmount = Number(amount);
     const weiAmount = IntAmount * 10 ** 18;

@@ -12,7 +12,7 @@ export type ScaffoldConfig = {
 const scaffoldConfig = {
   // The network where your DApp lives in
 
-  targetNetwork: process.env.NEXT_PUBLIC_REACT_APP_ETHEREUM_NETWORK === 'production'
+  targetNetwork: process.env.NEXT_PUBLIC_REACT_APP_ETHEREUM_NETWORK == 'production'
   ? chains.bsc
   : chains.bscTestnet,
 
